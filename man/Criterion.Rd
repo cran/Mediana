@@ -50,7 +50,7 @@ Mandatory arguments are \code{id}, \code{method}, \code{labels} and \code{tests}
 }
 
 \seealso{
-See Also as \code{\link{AnalysisModel}}.
+See Also \code{\link{AnalysisModel}}.
 }
 \examples{
 ## Add a Criterion to an EvaluationModel object

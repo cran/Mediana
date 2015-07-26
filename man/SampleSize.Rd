@@ -26,7 +26,7 @@ Either objects of class \code{Event} or \code{SampleSize} can be added to an obj
 }
 
 \seealso{
-See Also as \code{\link{DataModel}}.
+See Also \code{\link{DataModel}}.
 }
 \examples{
 # Outcome parameter set 1

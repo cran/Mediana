@@ -3744,11 +3744,11 @@ FisherTest = function(sample.list, parameter) {
 
 ######################################################################################################################
 
-# Function: stats::glmPoissonTest .
+# Function: GLMPoissonTest .
 # Argument: Data set and parameter (call type).
 # Description: Computes one-sided p-value based on Poisson regression.
 #' @importFrom stats poisson
-glmPoissonTest = function(sample.list, parameter) {
+GLMPoissonTest = function(sample.list, parameter) {
 
   # Determine the function call, either to generate the p-value or to return description
   call = (parameter[[1]] == "Description")
@@ -3782,15 +3782,15 @@ glmPoissonTest = function(sample.list, parameter) {
 
   return(result)
 }
-# End of stats::glmPoissonTest
+# End of GLMPoissonTest
 
 ######################################################################################################################
 
-# Function: stats::glmNegBinomTest.
+# Function: GLMNegBinomTest.
 # Argument: Data set and parameter (call type).
 # Description: Computes one-sided p-value based on Negative-Binomial regression.
 
-glmNegBinomTest = function(sample.list, parameter) {
+GLMNegBinomTest = function(sample.list, parameter) {
 
   # Determine the function call, either to generate the p-value or to return description
   call = (parameter[[1]] == "Description")
