@@ -12,8 +12,8 @@ Provides a general framework for clinical trial simulations based on the Clinica
 \tabular{ll}{
 Package: \tab Mediana\cr
 Type: \tab Package\cr
-Version: \tab 1.0.1\cr
-Date: \tab 2015-07-26\cr
+Version: \tab 1.0.2\cr
+Date: \tab 2015-11-16\cr
 License: \tab GPL-2\cr
 }
 %~~ An overview of how to use the package, including the most important functions ~~
@@ -26,7 +26,7 @@ Maintainer: Gautier Paux <gautier@paux.fr>
 \references{
 Benda, N., Branson, M., Maurer, W., Friede, T. (2010). Aspects of modernizing drug development using clinical scenario planning and evaluation. Drug Information Journal. 44, 299-315.
 
-\url{http://biopharmnet.com/mediana}
+\url{http://gpaux.github.io/Mediana/}
 
 }
 %~~ Optionally other standard keywords, one per line, from file KEYWORDS in the R documentation directory ~~
@@ -162,7 +162,7 @@ evaluation.model = EvaluationModel() +
 
 # Simulation Parameters
 sim.parameters =  SimParameters(n.sims = 1000, proc.load = 2, seed = 42938001)
-## Not run:
+
 # Perform clinical scenario evaluation
 results = CSE(data.model,
               analysis.model,
