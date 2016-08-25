@@ -21,6 +21,12 @@ GeneratePatients = function(current.design.parameter, current.outcome, current.s
       enroll.par = list(number, list(max = 1))
       # Uniform distribution is expanded over the enrollment period
       patient.start.time = current.design.parameter$enroll.period * sort(unlist(lapply(list(enroll.par), "UniformDist")))
+    } else if (current.design.parameter$enroll.dist == "BetaDist") {
+      # Beta patient start times
+      # Beta distribution parameters
+      enroll.par = list(number, current.design.parameter$enroll.dist.par)
+      # Beta distribution is expanded over the enrollment period
+      patient.start.time = current.design.parameter$enroll.period * sort(unlist(lapply(list(enroll.par), "BetaDist")))
     } else {
       # Non-uniform patient start times
       # List of enrollment parameters
@@ -47,8 +53,9 @@ GeneratePatients = function(current.design.parameter, current.outcome, current.s
     if (!is.na(current.design.parameter$dropout.dist)) {
       # Uniform patient dropout times
       if (current.design.parameter$dropout.dist == "UniformDist") {
-        # Uniform distribution over [0, 1]
-        dropout.par = list(number, 1/current.design.parameter$dropout.dist.par)
+        # The parameter corresponds to the proportion of dropout
+        # Generate Uniform distribution between 0 and 1/proportion
+        dropout.par = list(number, list(max = 1/current.design.parameter$dropout.dist.par$prop))
         # Uniform distribution is expanded over the patient-specific periods
         patient.dropout.time = patient.start.time + (patient.end.time - patient.start.time) *
           unlist(lapply(list(dropout.par), "UniformDist"))
@@ -157,11 +164,11 @@ GeneratePatients = function(current.design.parameter, current.outcome, current.s
     }
 
     # Create a data frame for the current sample and outcome
-    df = t(rbind(outcome,
-                 patient.start.time,
-                 patient.end.time,
-                 patient.dropout.time,
-                 patient.censor.indicator))
+    df = as.data.frame(t(rbind(outcome,
+                               patient.start.time,
+                               patient.end.time,
+                               patient.dropout.time,
+                               patient.censor.indicator)))
 
     colnames(df) = c("outcome",
                      "patient.start.time",

@@ -25,7 +25,7 @@ FisherTest = function(sample.list, parameter) {
 
     # Contingency table
     contingency.data = rbind(cbind(2, outcome2.complete), cbind(1, outcome1.complete))
-    contingency.table = table(utils::data[, 1], utils::data[, 2])
+    contingency.table = table(contingency.data[, 1], contingency.data[, 2])
 
 
     # One-sided p-value (treatment effect in sample 2 is expected to be greater than in sample 1)
