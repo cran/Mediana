@@ -1,3 +1,17 @@
+# Mediana 1.0.5
+
+## New features
+
+* Addition of the `AdjustPvalues` function which can be used to get adjusted p-values from a Multiple Testing Procedure. This function cannot be used within the CSE framework but it is an add-on function to compute adjusted p-values.
+
+* Addition of the `AdjustCIs` function which can be used to get simultaneous confidence intervals from a Multiple Testing Procedure. This function cannot be used within the CSE framework but it is an add-on function to simultaneous confidence intervals.
+
+* Creation of vignettes
+ 
+## Bug fixes
+
+* Revision of the dropout generation mechanism for time-to-event endpoints.
+
 # Mediana 1.0.4
 
 ## New features
@@ -7,7 +21,7 @@
 * Addition of the Cox method to calculate the HR, effect size and ratio of effect size for time-to-event endpoint. This can be accomplished by setting the  `method` argument in the parameter list to set-up the calculation based on the Cox method. (`par = parameters(method = "Cox"`), see [Analysis model](http://gpaux.github.io/Mediana/AnalysisModel.html#Statisticobject)).
 
 * Addition of the package version information in the report.
-* 
+ 
 ## Bug fixes
 
 * Revision of one-sided p-value computation for Log-Rank test.
