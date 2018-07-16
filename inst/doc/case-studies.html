@@ -12,7 +12,7 @@
 
 <meta name="author" content="Gautier Paux and Alex Dmitrienko" />
 
-<meta name="date" content="2018-02-12" />
+<meta name="date" content="2018-07-16" />
 
 <title>Case studies</title>
 
@@ -70,7 +70,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 
 <h1 class="title toc-ignore">Case studies</h1>
 <h4 class="author"><em>Gautier Paux and Alex Dmitrienko</em></h4>
-<h4 class="date"><em>2018-02-12</em></h4>
+<h4 class="date"><em>2018-07-16</em></h4>
 
 
 
@@ -135,13 +135,13 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.data.model =<span class="st"> </span><span class="kw">DataModel</span>()</code></pre></div>
 <p>After the initialization, components of the data model can be added to the <code>DataModel</code> object incrementally using the <code>+</code> operator.</p>
 <p>The change from baseline in the six-minute walk distance is assumed to follow a normal distribution. The distribution of the primary endpoint is defined in the <code>OutcomeDist</code> object:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.data.model =<span class="st">  </span>case.study1.data.model +
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.data.model =<span class="st">  </span>case.study1.data.model <span class="op">+</span>
 <span class="st">  </span><span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;NormalDist&quot;</span>)</code></pre></div>
 <p>The sponsor would like to perform power evaluation over a broad range of sample sizes in each treatment arm:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.data.model =<span class="st">  </span>case.study1.data.model +
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.data.model =<span class="st">  </span>case.study1.data.model <span class="op">+</span>
 <span class="st">  </span><span class="kw">SampleSize</span>(<span class="kw">c</span>(<span class="dv">50</span>, <span class="dv">55</span>, <span class="dv">60</span>, <span class="dv">65</span>, <span class="dv">70</span>)) </code></pre></div>
 <p>As a side note, the <code>seq</code> function can be used to compactly define sample sizes in a data model:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.data.model =<span class="st">  </span>case.study1.data.model +
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.data.model =<span class="st">  </span>case.study1.data.model <span class="op">+</span>
 <span class="st">  </span><span class="kw">SampleSize</span>(<span class="kw">seq</span>(<span class="dv">50</span>, <span class="dv">70</span>, <span class="dv">5</span>)) </code></pre></div>
 <p>The sponsor is interested in performing power calculations under two treatment effect scenarios (standard and optimistic scenarios). Under these scenarios, the experimental treatment is expected to improve the six-minute walk distance by 40 or 50 meters compared to placebo, respectively, with the common standard deviation of 70 meters.</p>
 <p>Therefore, the mean change in the placebo arm is set to μ = 0 and the mean changes in the six-minute walk distance in the experimental arm are set to μ = 40 (standard scenario) or μ = 50 (optimistic scenario). The common standard deviation is σ = 70.</p>
@@ -154,9 +154,9 @@ outcome2.placebo =<span class="st"> </span><span class="kw">parameters</span>(<s
 outcome2.treatment =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">50</span>, <span class="dt">sd =</span> <span class="dv">70</span>)</code></pre></div>
 <p>Note that the mean and standard deviation are explicitly identified in each list. This is done mainly for the user’s convenience.</p>
 <p>After having defined the outcome parameters for each sample, two <code>Sample</code> objects that define the two treatment arms in this trial can be created and added to the <code>DataModel</code> object:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.data.model =<span class="st">  </span>case.study1.data.model +
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.data.model =<span class="st">  </span>case.study1.data.model <span class="op">+</span>
 <span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo&quot;</span>,
-         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.placebo, outcome2.placebo)) +
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.placebo, outcome2.placebo)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Treatment&quot;</span>,
          <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.treatment, outcome2.treatment))</code></pre></div>
 </div>
@@ -165,13 +165,13 @@ outcome2.treatment =<span class="st"> </span><span class="kw">parameters</span>(
 <p>Just like the data model, the analysis model needs to be initialized as follows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>()</code></pre></div>
 <p>Only one significance test is planned to be carried out in the PAH clinical trial (treatment versus placebo). The treatment effect will be assessed using the one-sided two-sample <em>t</em>-test:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.analysis.model =<span class="st"> </span>case.study1.analysis.model +
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.analysis.model =<span class="st"> </span>case.study1.analysis.model <span class="op">+</span>
 <span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs treatment&quot;</span>,
        <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Treatment&quot;</span>),
        <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>)</code></pre></div>
 <p>According to the specifications, the two-sample t-test will be applied to Sample 1 (Placebo) and Sample 2 (Treatment). These sample IDs come from the data model defied earlier. As explained in the manual, see <a href="http://gpaux.github.io/Mediana/AnalysisModel.html">Analysis Model</a>, the sample order is determined by the expected direction of the treatment effect. In this case, an increase in the six-minute walk distance indicates a beneficial effect and a numerically larger value of the primary endpoint is expected in Sample 2 (Treatment) compared to Sample 1 (Placebo). This implies that the list of samples to be passed to the t-test should include Sample 1 followed by Sample 2. It is of note that from version 1.0.6, it is possible to specify an option to indicate if a larger numeric values is expected in the Sample 2 (<code>larger = TRUE</code>) or in Sample 1 (<code>larger = FALSE</code>). By default, this argument is set to <code>TRUE</code>.</p>
 <p>To illustrate the use of the <code>Statistic</code> object, the mean change in the six-minute walk distance in the treatment arm can be computed using the <code>MeanStat</code> statistic:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.analysis.model =<span class="st"> </span>case.study1.analysis.model +
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.analysis.model =<span class="st"> </span>case.study1.analysis.model <span class="op">+</span>
 <span class="st">  </span><span class="kw">Statistic</span>(<span class="dt">id =</span> <span class="st">&quot;Mean Treatment&quot;</span>,
             <span class="dt">method =</span> <span class="st">&quot;MeanStat&quot;</span>,
             <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Treatment&quot;</span>))</code></pre></div>
@@ -182,7 +182,7 @@ outcome2.treatment =<span class="st"> </span><span class="kw">parameters</span>(
 <p>First of all, the evaluation model must be initialized:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>()</code></pre></div>
 <p>Secondly, the success criterion of interest (marginal power) is defined using the <code>Criterion</code> object:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.evaluation.model =<span class="st"> </span>case.study1.evaluation.model +
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.evaluation.model =<span class="st"> </span>case.study1.evaluation.model <span class="op">+</span>
 <span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Marginal power&quot;</span>,
             <span class="dt">method =</span> <span class="st">&quot;MarginalPower&quot;</span>,
             <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs treatment&quot;</span>),
@@ -190,7 +190,7 @@ outcome2.treatment =<span class="st"> </span><span class="kw">parameters</span>(
             <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>))</code></pre></div>
 <p>The <code>tests</code> argument lists the IDs of the tests (defined in the analysis model) to which the criterion is applied (note that more than one test can be specified). The test IDs link the evaluation model with the corresponding analysis model. In this particular case, marginal power will be computed for the t-test that compares the mean change in the six-minute walk distance in the placebo and treatment arms (Placebo vs treatment).</p>
 <p>In order to compute the average value of the mean statistic specified in the analysis model (i.e., the mean change in the six-minute walk distance in the treatment arm) over the simulation runs, another <code>Criterion</code> object needs to be added:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.evaluation.model =<span class="st"> </span>case.study1.evaluation.model +
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.evaluation.model =<span class="st"> </span>case.study1.evaluation.model <span class="op">+</span>
 <span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Average Mean&quot;</span>,
             <span class="dt">method =</span> <span class="st">&quot;MeanSumm&quot;</span>,
             <span class="dt">statistics =</span> <span class="kw">statistics</span>(<span class="st">&quot;Mean Treatment&quot;</span>),
@@ -232,16 +232,16 @@ case.study1.simulation.results =<span class="st"> </span><span class="kw">summar
 <p>To generate a simulation report, the user needs to define a presentation model by creating a <code>PresentationModel</code> object. This object must be initialized as follows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.presentation.model =<span class="st"> </span><span class="kw">PresentationModel</span>()</code></pre></div>
 <p>Project information can be added to the presentation model using the <code>Project</code> object:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.presentation.model =<span class="st"> </span>case.study1.presentation.model +
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.presentation.model =<span class="st"> </span>case.study1.presentation.model <span class="op">+</span>
 <span class="st">  </span><span class="kw">Project</span>(<span class="dt">username =</span> <span class="st">&quot;[Mediana's User]&quot;</span>,
           <span class="dt">title =</span> <span class="st">&quot;Case study 1&quot;</span>,
           <span class="dt">description =</span> <span class="st">&quot;Clinical trial in patients with pulmonary arterial hypertension&quot;</span>)</code></pre></div>
 <p>The user can easily customize the simulation report by defining report sections and specifying properties of summary tables in the report. The code shown below creates a separate section within the report for each set of outcome parameters (using the <code>Section</code> object) and sets the sorting option for the summary tables (using the <code>Table</code> object). The tables will be sorted by the sample size. Further, in order to define descriptive labels for the outcome parameter scenarios and sample size scenarios, the <code>CustomLabel</code> object needs to be used:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.presentation.model =<span class="st"> </span>case.study1.presentation.model +
-<span class="st">  </span><span class="kw">Section</span>(<span class="dt">by =</span> <span class="st">&quot;outcome.parameter&quot;</span>) +
-<span class="st">  </span><span class="kw">Table</span>(<span class="dt">by =</span> <span class="st">&quot;sample.size&quot;</span>) +
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study1.presentation.model =<span class="st"> </span>case.study1.presentation.model <span class="op">+</span>
+<span class="st">  </span><span class="kw">Section</span>(<span class="dt">by =</span> <span class="st">&quot;outcome.parameter&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">Table</span>(<span class="dt">by =</span> <span class="st">&quot;sample.size&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">CustomLabel</span>(<span class="dt">param =</span> <span class="st">&quot;sample.size&quot;</span>, 
-              <span class="dt">label=</span> <span class="kw">paste0</span>(<span class="st">&quot;N = &quot;</span>,<span class="kw">c</span>(<span class="dv">50</span>, <span class="dv">55</span>, <span class="dv">60</span>, <span class="dv">65</span>, <span class="dv">70</span>))) +
+              <span class="dt">label=</span> <span class="kw">paste0</span>(<span class="st">&quot;N = &quot;</span>,<span class="kw">c</span>(<span class="dv">50</span>, <span class="dv">55</span>, <span class="dv">60</span>, <span class="dv">65</span>, <span class="dv">70</span>))) <span class="op">+</span>
 <span class="st">  </span><span class="kw">CustomLabel</span>(<span class="dt">param =</span> <span class="st">&quot;outcome.parameter&quot;</span>, 
               <span class="dt">label=</span><span class="kw">c</span>(<span class="st">&quot;Standard&quot;</span>, <span class="st">&quot;Optismistic&quot;</span>))</code></pre></div>
 </div>
@@ -283,11 +283,11 @@ outcome3.placebo =<span class="st"> </span><span class="kw">parameters</span>(<s
 outcome3.treatment =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.60</span>)
 
 <span class="co"># Data model</span>
-case.study1.data.model =<span class="st"> </span><span class="kw">DataModel</span>() +
-<span class="st">  </span><span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;BinomDist&quot;</span>) +
-<span class="st">  </span><span class="kw">SampleSize</span>(<span class="kw">c</span>(<span class="dv">80</span>, <span class="dv">90</span>, <span class="dv">100</span>, <span class="dv">110</span>)) +
+case.study1.data.model =<span class="st"> </span><span class="kw">DataModel</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;BinomDist&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">SampleSize</span>(<span class="kw">c</span>(<span class="dv">80</span>, <span class="dv">90</span>, <span class="dv">100</span>, <span class="dv">110</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo&quot;</span>,
-         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.placebo, outcome2.placebo,  outcome3.placebo)) +
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.placebo, outcome2.placebo,  outcome3.placebo)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Treatment&quot;</span>,
          <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.treatment, outcome2.treatment, outcome3.treatment))</code></pre></div>
 </div>
@@ -295,7 +295,7 @@ case.study1.data.model =<span class="st"> </span><span class="kw">DataModel</spa
 <h3>Define an Analysis Model</h3>
 <p>The analysis model uses a standard two-sample test for comparing proportions (<code>method = &quot;PropTest&quot;</code>) to assess the treatment effect in this clinical trial example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Analysis model</span>
-case.study1.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() +
+case.study1.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs treatment&quot;</span>,
        <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Treatment&quot;</span>),
        <span class="dt">method =</span> <span class="st">&quot;PropTest&quot;</span>)</code></pre></div>
@@ -304,7 +304,7 @@ case.study1.analysis.model =<span class="st"> </span><span class="kw">AnalysisMo
 <h3>Define an Evaluation Model</h3>
 <p>Power evaluations are easily performed in this clinical trial example using the same evaluation model utilized in the case of a normally distributed endpoint, i.e., evaluations rely on marginal power:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Evaluation model</span>
-case.study1.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>() +
+case.study1.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Marginal power&quot;</span>,
             <span class="dt">method =</span> <span class="st">&quot;MarginalPower&quot;</span>,
             <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs treatment&quot;</span>),
@@ -341,11 +341,11 @@ case.study1.evaluation.model =<span class="st"> </span><span class="kw">Evaluati
 <p>and the resulting hazard ratio (HR) is 0.077/0.116 = 0.67.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Outcome parameters</span>
 median.time.placebo =<span class="st"> </span><span class="dv">6</span>
-rate.placebo =<span class="st"> </span><span class="kw">log</span>(<span class="dv">2</span>)/median.time.placebo
+rate.placebo =<span class="st"> </span><span class="kw">log</span>(<span class="dv">2</span>)<span class="op">/</span>median.time.placebo
 outcome.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">rate =</span> rate.placebo)
 
 median.time.treatment =<span class="st"> </span><span class="dv">9</span>
-rate.treatment =<span class="st"> </span><span class="kw">log</span>(<span class="dv">2</span>)/median.time.treatment
+rate.treatment =<span class="st"> </span><span class="kw">log</span>(<span class="dv">2</span>)<span class="op">/</span>median.time.treatment
 outcome.treatment =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">rate =</span> rate.treatment)</code></pre></div>
 <p>It is important to note that, if no censoring mechanisms are specified in a data model with a time-to-event endpoint, all patients will reach the endpoint of interest (e.g., progression) and thus the number of patients will be equal to the number of events. Using this property, power calculations can be performed using either the <code>Event</code> object or <code>SampleSize</code> object. For the purpose of illustration, the <code>Event</code> object will be used in this example.</p>
 <p>To define a data model in the MCC clinical trial, the total event count in the trial is assumed to range between 270 and 300. Since the trial’s design is not balanced, the randomization ratio needs to be specified in the <code>Event</code> object:</p>
@@ -354,11 +354,11 @@ event.count.total =<span class="st"> </span><span class="kw">c</span>(<span clas
 randomization.ratio =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)
 
 <span class="co"># Data model</span>
-case.study1.data.model =<span class="st"> </span><span class="kw">DataModel</span>() +
-<span class="st">  </span><span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;ExpoDist&quot;</span>) +
-<span class="st">  </span><span class="kw">Event</span>(<span class="dt">n.events =</span> event.count.total, <span class="dt">rando.ratio =</span> randomization.ratio) +
+case.study1.data.model =<span class="st"> </span><span class="kw">DataModel</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;ExpoDist&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">Event</span>(<span class="dt">n.events =</span> event.count.total, <span class="dt">rando.ratio =</span> randomization.ratio) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo&quot;</span>,
-         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.placebo)) +
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.placebo)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Treatment&quot;</span>,
          <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.treatment))</code></pre></div>
 <p>It is worth noting that the primary endpoint’s type (i.e., the<code>outcome.type</code> argument in the <code>OutcomeDist</code> object) is not specified. By default, the outcome type is set to <code>fixed</code>, which means that a design with a fixed follow-up is assumed even though the primary endpoint in this clinical trial is clearly a time-to-event endpoint. This is due to the fact that, as was explained earlier in this case study, there is no censoring in this design and all patients are followed until the event of interest is observed. It is easy to verify that the same results are obtained if the outcome type is set to <code>event</code>.</p>
@@ -367,13 +367,13 @@ case.study1.data.model =<span class="st"> </span><span class="kw">DataModel</spa
 <h3>Define an Analysis Model</h3>
 <p>The analysis model in this clinical trial is very similar to the analysis models defined in the case studies with normal and binomial outcome variables. The only difference is the choice of the statistical method utilized in the primary analysis (<code>method = &quot;LogrankTest&quot;</code>):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Analysis model</span>
-case.study1.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() +
+case.study1.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs treatment&quot;</span>,
        <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Treatment&quot;</span>),
        <span class="dt">method =</span> <span class="st">&quot;LogrankTest&quot;</span>)</code></pre></div>
 <p>To illustrate the specification of a <code>Statistic</code> object, the hazard ratio will be computed using the Cox method. This can be accomplished by adding a <code>Statistic</code> object to the <code>AnalysisModel</code> such presented below.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Analysis model</span>
-case.study1.analysis.model =<span class="st"> </span>case.study1.analysis.model +
+case.study1.analysis.model =<span class="st"> </span>case.study1.analysis.model <span class="op">+</span>
 <span class="st">  </span><span class="kw">Statistic</span>(<span class="dt">id =</span> <span class="st">&quot;Hazard Ratio&quot;</span>,
        <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Treatment&quot;</span>),
        <span class="dt">method =</span> <span class="st">&quot;HazardRatioStat&quot;</span>,
@@ -383,12 +383,12 @@ case.study1.analysis.model =<span class="st"> </span>case.study1.analysis.model 
 <h3>Define an Evaluation Model</h3>
 <p>An evaluation model identical to that used earlier in the case studies with normal and binomial distribution can be applied to compute the power function at the selected event counts. Moreover, the average hazard ratio accross the simulations will be computed.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Evaluation model</span>
-case.study1.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>() +
+case.study1.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Marginal power&quot;</span>,
             <span class="dt">method =</span> <span class="st">&quot;MarginalPower&quot;</span>,
             <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs treatment&quot;</span>),
             <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Placebo vs treatment&quot;</span>),
-            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>)) +
+            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Hazard Ratio&quot;</span>,
             <span class="dt">method =</span> <span class="st">&quot;MeanSumm&quot;</span>,
             <span class="dt">statistics =</span> <span class="kw">tests</span>(<span class="st">&quot;Hazard Ratio&quot;</span>),
@@ -428,27 +428,27 @@ randomization.ratio =<span class="st"> </span><span class="kw">c</span>(<span cl
 
 <span class="co"># Outcome parameters</span>
 median.time.placebo =<span class="st"> </span><span class="dv">6</span>
-rate.placebo =<span class="st"> </span><span class="kw">log</span>(<span class="dv">2</span>)/median.time.placebo
+rate.placebo =<span class="st"> </span><span class="kw">log</span>(<span class="dv">2</span>)<span class="op">/</span>median.time.placebo
 outcome.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">rate =</span> rate.placebo)
 median.time.treatment =<span class="st"> </span><span class="dv">9</span>
-rate.treatment =<span class="st"> </span><span class="kw">log</span>(<span class="dv">2</span>)/median.time.treatment
+rate.treatment =<span class="st"> </span><span class="kw">log</span>(<span class="dv">2</span>)<span class="op">/</span>median.time.treatment
 outcome.treatment =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">rate =</span> rate.treatment)
 
 <span class="co"># Dropout parameters</span>
 dropout.par =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">rate =</span> <span class="fl">0.0115</span>)
 
 <span class="co"># Data model</span>
-case.study1.data.model =<span class="st"> </span><span class="kw">DataModel</span>() +
+case.study1.data.model =<span class="st"> </span><span class="kw">DataModel</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;ExpoDist&quot;</span>, 
-              <span class="dt">outcome.type =</span> <span class="st">&quot;event&quot;</span>) +
-<span class="st">  </span><span class="kw">Event</span>(<span class="dt">n.events =</span> event.count.total, <span class="dt">rando.ratio =</span> randomization.ratio) +
+              <span class="dt">outcome.type =</span> <span class="st">&quot;event&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">Event</span>(<span class="dt">n.events =</span> event.count.total, <span class="dt">rando.ratio =</span> randomization.ratio) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Design</span>(<span class="dt">enroll.period =</span> <span class="dv">9</span>,
          <span class="dt">study.duration =</span> <span class="dv">21</span>,
          <span class="dt">enroll.dist =</span> <span class="st">&quot;UniformDist&quot;</span>,
          <span class="dt">dropout.dist =</span> <span class="st">&quot;ExpoDist&quot;</span>,
-         <span class="dt">dropout.dist.par =</span> dropout.par) +
+         <span class="dt">dropout.dist.par =</span> dropout.par) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo&quot;</span>,
-         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.placebo)) +
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.placebo)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Treatment&quot;</span>,
          <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.treatment))</code></pre></div>
 </div>
@@ -456,19 +456,19 @@ case.study1.data.model =<span class="st"> </span><span class="kw">DataModel</spa
 <h3>Define an Analysis Model</h3>
 <p>Since the number of events has been fixed in this clinical trial example and some patients will not reach the event of interest, it will be important to estimate the number of patients required to accrue the required number of events. In the Mediana package, this can be accomplished by specifying a descriptive statistic named <code>PatientCountStat</code> (this statistic needs to be specified in a <code>Statistic</code> object). Another descriptive statistic that would be of interest is the event count in each sample. To compute this statistic, <code>EventCountStat</code> needs to be included in a <code>Statistic</code> object.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Analysis model</span>
-case.study1.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() +
+case.study1.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs treatment&quot;</span>,
        <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Treatment&quot;</span>),
-       <span class="dt">method =</span> <span class="st">&quot;LogrankTest&quot;</span>) +
+       <span class="dt">method =</span> <span class="st">&quot;LogrankTest&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Statistic</span>(<span class="dt">id =</span> <span class="st">&quot;Events Placebo&quot;</span>,
             <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>),
-            <span class="dt">method =</span> <span class="st">&quot;EventCountStat&quot;</span>) +
+            <span class="dt">method =</span> <span class="st">&quot;EventCountStat&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Statistic</span>(<span class="dt">id =</span> <span class="st">&quot;Events Treatment&quot;</span>,
             <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Treatment&quot;</span>),
-            <span class="dt">method =</span> <span class="st">&quot;EventCountStat&quot;</span>)  +
+            <span class="dt">method =</span> <span class="st">&quot;EventCountStat&quot;</span>)  <span class="op">+</span>
 <span class="st">  </span><span class="kw">Statistic</span>(<span class="dt">id =</span> <span class="st">&quot;Patients Placebo&quot;</span>,
             <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>),
-            <span class="dt">method =</span> <span class="st">&quot;PatientCountStat&quot;</span>) +
+            <span class="dt">method =</span> <span class="st">&quot;PatientCountStat&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Statistic</span>(<span class="dt">id =</span> <span class="st">&quot;Patients Treatment&quot;</span>,
             <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Treatment&quot;</span>),
             <span class="dt">method =</span> <span class="st">&quot;PatientCountStat&quot;</span>)</code></pre></div>
@@ -477,16 +477,16 @@ case.study1.analysis.model =<span class="st"> </span><span class="kw">AnalysisMo
 <h3>Define an Evaluation Model</h3>
 <p>In order to compute the average values of the two statistics (<code>PatientCountStat</code> and <code>EventCountStat</code>) in each sample over the simulation runs, two <code>Criterion</code> objects need to be specified, in addition to the <code>Criterion</code> object defined to obtain marginal power. The IDs of the corresponding <code>Statistic</code> objects will be included in the <code>statistics</code> argument of the two <code>Criterion</code> objects:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Evaluation model</span>
-case.study1.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>() +
+case.study1.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Marginal power&quot;</span>,
             <span class="dt">method =</span> <span class="st">&quot;MarginalPower&quot;</span>,
             <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs treatment&quot;</span>),
             <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Placebo vs treatment&quot;</span>),
-            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>))  +
+            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>))  <span class="op">+</span>
 <span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Mean Events&quot;</span>,
             <span class="dt">method =</span> <span class="st">&quot;MeanSumm&quot;</span>,
             <span class="dt">statistics =</span> <span class="kw">statistics</span>(<span class="st">&quot;Events Placebo&quot;</span>, <span class="st">&quot;Events Treatment&quot;</span>),
-            <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Mean Events Placebo&quot;</span>, <span class="st">&quot;Mean Events Treatment&quot;</span>)) +
+            <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Mean Events Placebo&quot;</span>, <span class="st">&quot;Mean Events Treatment&quot;</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Mean Patients&quot;</span>,
             <span class="dt">method =</span> <span class="st">&quot;MeanSumm&quot;</span>,
             <span class="dt">statistics =</span> <span class="kw">statistics</span>(<span class="st">&quot;Patients Placebo&quot;</span>, <span class="st">&quot;Patients Treatment&quot;</span>),
@@ -514,11 +514,11 @@ outcome.placebo =<span class="st"> </span><span class="kw">parameters</span>(<sp
 outcome.treatment =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">dispersion =</span> <span class="fl">0.5</span>, <span class="dt">mean =</span> <span class="fl">7.8</span>)
 
 <span class="co"># Data model</span>
-case.study1.data.model =<span class="st"> </span><span class="kw">DataModel</span>() +
-<span class="st">  </span><span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;NegBinomDist&quot;</span>) +
-<span class="st">  </span><span class="kw">SampleSize</span>(<span class="kw">seq</span>(<span class="dv">100</span>, <span class="dv">150</span>, <span class="dv">10</span>)) +
+case.study1.data.model =<span class="st"> </span><span class="kw">DataModel</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;NegBinomDist&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">SampleSize</span>(<span class="kw">seq</span>(<span class="dv">100</span>, <span class="dv">150</span>, <span class="dv">10</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo&quot;</span>,
-         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.placebo)) +
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.placebo)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Treatment&quot;</span>,
          <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.treatment))</code></pre></div>
 </div>
@@ -526,13 +526,13 @@ case.study1.data.model =<span class="st"> </span><span class="kw">DataModel</spa
 <h3>Define an Analysis Model</h3>
 <p>The treatment effect will be assessed in this clinical trial example using a negative binomial generalized linear model (NBGLM). In the Mediana package, the corresponding test is carrying out using the <code>GLMNegBinomTest</code> method which is specified in the <code>Test</code> object. It should be noted that as a smaller value indicates a treatment benefit, the first sample defined in the <code>samples</code> argument must be <code>Treatment</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Analysis model</span>
-case.study1.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() +
+case.study1.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Treatment vs Placebo&quot;</span>,
        <span class="dt">samples =</span> <span class="kw">samples</span>( <span class="st">&quot;Treatment&quot;</span>, <span class="st">&quot;Placebo&quot;</span>),
        <span class="dt">method =</span> <span class="st">&quot;GLMNegBinomTest&quot;</span>)</code></pre></div>
 <p>Alternatively, from version 1.0.6, it is possible to specify the argument <code>lower</code> in the parameters of the method. If set to <code>FALSE</code> a numerically lower value is expected in Sample 2.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Analysis model</span>
-case.study1.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() +
+case.study1.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Treatment vs Placebo&quot;</span>,
        <span class="dt">samples =</span> <span class="kw">samples</span>( <span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Treatment&quot;</span>),
        <span class="dt">method =</span> <span class="st">&quot;GLMNegBinomTest&quot;</span>,
@@ -542,7 +542,7 @@ case.study1.analysis.model =<span class="st"> </span><span class="kw">AnalysisMo
 <h3>Define an Evaluation Model</h3>
 <p>The objective of this clinical trial is identical to that of the clinical trials presented earlier on this page, i.e., evaluation will be based on marginal power of the primary endpoint test. As a consequence, the same evaluation model can be applied.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Evaluation model</span>
-case.study1.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>() +
+case.study1.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Marginal power&quot;</span>,
             <span class="dt">method =</span> <span class="st">&quot;MarginalPower&quot;</span>,
             <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Treatment vs Placebo&quot;</span>),
@@ -566,9 +566,9 @@ case.study1.evaluation.model =<span class="st"> </span><span class="kw">Evaluati
 <p>This clinical trial example deals with settings where no analytical methods are available to support power calculations. However, as demonstrated below, simulation-based approaches are easily applied to perform а comprehensive assessment of the relevant operating characteristics within the clinical scenario evaluation framework.</p>
 <p>Case study 2 is based on a clinical trial example introduced in Dmitrienko and D’Agostino (2013, Section 10). This example deals with a Phase III clinical trial in a schizophrenia population. Three doses of a new treatment, labelled Dose L, Dose M and Dose H, will be tested versus placebo. The trial will be declared successful if a beneficial treatment effect is demonstrated in any of the three dosing groups compared to the placebo group.</p>
 <p>The primary endpoint is defined as the reduction in the Positive and Negative Syndrome Scale (PANSS) total score compared to baseline and a larger reduction in the PANSS total score indicates treatment benefit. This endpoint is normally distributed and the treatment effect assumptions in the four treatment arms are displayed in the next table.</p>
-<table style="width:26%;">
+<table style="width:29%;">
 <colgroup>
-<col width="11%"></col>
+<col width="13%"></col>
 <col width="9%"></col>
 <col width="5%"></col>
 </colgroup>
@@ -613,15 +613,15 @@ outcome.dosem =<span class="st"> </span><span class="kw">parameters</span>(<span
 outcome.doseh =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">21</span>, <span class="dt">sd =</span> <span class="dv">18</span>)
 
 <span class="co"># Data model</span>
-case.study2.data.model =<span class="st"> </span><span class="kw">DataModel</span>() +
-<span class="st">  </span><span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;NormalDist&quot;</span>) +
-<span class="st">  </span><span class="kw">SampleSize</span>(<span class="kw">seq</span>(<span class="dv">220</span>, <span class="dv">260</span>, <span class="dv">20</span>)) +
+case.study2.data.model =<span class="st"> </span><span class="kw">DataModel</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;NormalDist&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">SampleSize</span>(<span class="kw">seq</span>(<span class="dv">220</span>, <span class="dv">260</span>, <span class="dv">20</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo&quot;</span>,
-         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.pl)) +
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.pl)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Dose L&quot;</span>,
-         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.dosel)) +
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.dosel)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Dose M&quot;</span>,
-         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.dosem)) +
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.dosem)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Dose H&quot;</span>,
          <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.doseh))</code></pre></div>
 </div>
@@ -637,14 +637,14 @@ case.study2.data.model =<span class="st"> </span><span class="kw">DataModel</spa
 <p>As indicated earlier, the overall success criterion in the trial is formulated in terms of demonstrating a beneficial effect at any of the three doses. Due to multiple opportunities to claim success, the overall Type I error rate will be inflated and the Hochberg procedure is introduced to protect the error rate at the nominal level.</p>
 <p>Since no procedure parameters are defined, the three significance tests (or, equivalently, three null hypotheses of no effect) are assumed to be equally weighted. The corresponding analysis model is defined below:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Analysis model</span>
-case.study2.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() +
-<span class="st">  </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;HochbergAdj&quot;</span>) +
+case.study2.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;HochbergAdj&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs Dose L&quot;</span>,
        <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Dose L&quot;</span>),
-       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>) +
+       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs Dose M&quot;</span>,
        <span class="dt">samples =</span> <span class="kw">samples</span> (<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Dose M&quot;</span>),
-       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>) +
+       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs Dose H&quot;</span>,
        <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Dose H&quot;</span>),
        <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>)</code></pre></div>
@@ -659,10 +659,10 @@ case.study2.analysis.model =<span class="st"> </span><span class="kw">AnalysisMo
 <p>Since the trial will be declared successful if at least one dose-placebo comparison is significant, it is natural to compute the overall success probability, which is defined as the probability of demonstrating treatment benefit in one of more dosing groups. This is equivalent to evaluating disjunctive power in the trial (<code>method = &quot;DisjunctivePower&quot;</code>).</p>
 <p>In addition, the user can easily define a custom evaluation criterion. Suppose that, based on the results of the previously conducted trials, the sponsor expects a much larger treatment treatment difference at Dose H compared to Doses L and M. Given this, the sponsor may be interested in evaluating the probability of observing a significant treatment effect at Dose H and at least one other dose. The associated evaluation criterion is implemented in the following function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Custom evaluation criterion (Dose H and at least one of the two other doses are significant)</span>
-case.study2.criterion =<span class="st"> </span>function(test.result, statistic.result, parameter) {
+case.study2.criterion =<span class="st"> </span><span class="cf">function</span>(test.result, statistic.result, parameter) {
   
   alpha =<span class="st"> </span>parameter
-  significant =<span class="st"> </span>((test.result[,<span class="dv">3</span>] &lt;=<span class="st"> </span>alpha) &amp;<span class="st"> </span>((test.result[,<span class="dv">1</span>] &lt;=<span class="st"> </span>alpha) |<span class="st"> </span>(test.result[,<span class="dv">2</span>] &lt;=<span class="st"> </span>alpha)))
+  significant =<span class="st"> </span>((test.result[,<span class="dv">3</span>] <span class="op">&lt;=</span><span class="st"> </span>alpha) <span class="op">&amp;</span><span class="st"> </span>((test.result[,<span class="dv">1</span>] <span class="op">&lt;=</span><span class="st"> </span>alpha) <span class="op">|</span><span class="st"> </span>(test.result[,<span class="dv">2</span>] <span class="op">&lt;=</span><span class="st"> </span>alpha)))
   power =<span class="st"> </span><span class="kw">mean</span>(significant)
   <span class="kw">return</span>(power)
 }</code></pre></div>
@@ -670,7 +670,7 @@ case.study2.criterion =<span class="st"> </span>function(test.result, statistic.
 <p>The <code>case.study2.criterion</code> function computes the probability of a significant treatment effect at Dose H (<code>test.result[,3] &lt;= alpha</code>) and a significant treatment difference at Dose L or Dose M (<code>(test.result[,1] &lt;= alpha) | (test.result[,2]&lt;= alpha)</code>). Since this criterion assumes that the third test is based on the comparison of Dose H versus Placebo, the order in which the tests are included in the evaluation model is important.</p>
 <p>The following evaluation model specifies marginal and disjunctive power as well as the custom evaluation criterion defined above:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Evaluation model</span>
-case.study2.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>() +
+case.study2.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Marginal power&quot;</span>,
             <span class="dt">method =</span> <span class="st">&quot;MarginalPower&quot;</span>,
             <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs Dose L&quot;</span>,
@@ -679,14 +679,14 @@ case.study2.evaluation.model =<span class="st"> </span><span class="kw">Evaluati
             <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Placebo vs Dose L&quot;</span>,
                        <span class="st">&quot;Placebo vs Dose M&quot;</span>,
                        <span class="st">&quot;Placebo vs Dose H&quot;</span>),
-            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>)) +
+            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Disjunctive power&quot;</span>,
             <span class="dt">method =</span> <span class="st">&quot;DisjunctivePower&quot;</span>,
             <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs Dose L&quot;</span>,
                           <span class="st">&quot;Placebo vs Dose M&quot;</span>,
                           <span class="st">&quot;Placebo vs Dose H&quot;</span>),
             <span class="dt">labels =</span> <span class="st">&quot;Disjunctive power&quot;</span>,
-            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>)) +
+            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Dose H and at least one dose&quot;</span>,
             <span class="dt">method =</span> <span class="st">&quot;case.study2.criterion&quot;</span>,
             <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs Dose L&quot;</span>,
@@ -730,11 +730,11 @@ case.study2.evaluation.model =<span class="st"> </span><span class="kw">Evaluati
 </ul>
 <p>Using this definition of samples, the trial’s sponsor can model the fact that the treatment’s effect is most pronounced in patients with a marker-positive status.</p>
 <p>The treatment effect assumptions in the four samples are summarized in the next table (expiratory volume in FEV1 is measured in liters). As shown in the table, the mean change in FEV1 is constant across the marker-negative and marker-positive subpopulations in the placebo arm (Samples 1 and 2). A positive treatment effect is expected in both subpopulations in the treatment arm but marker-positive patients will experience most of the beneficial effect (Sample 4).</p>
-<table style="width:33%;">
+<table style="width:40%;">
 <colgroup>
-<col width="18%"></col>
+<col width="20%"></col>
 <col width="9%"></col>
-<col width="5%"></col>
+<col width="9%"></col>
 </colgroup>
 <thead>
 <tr class="header">
@@ -775,23 +775,23 @@ outcome.treatment.plus =<span class="st"> </span><span class="kw">parameters</sp
 
 <span class="co"># Sample size parameters</span>
 sample.size.total =<span class="st"> </span><span class="kw">c</span>(<span class="dv">330</span>, <span class="dv">340</span>, <span class="dv">350</span>)
-sample.size.placebo.minus =<span class="st"> </span><span class="kw">as.list</span>(<span class="fl">0.3</span> *<span class="st"> </span>sample.size.total)
-sample.size.placebo.plus =<span class="st"> </span><span class="kw">as.list</span>(<span class="fl">0.2</span> *<span class="st"> </span>sample.size.total)
-sample.size.treatment.minus =<span class="st"> </span><span class="kw">as.list</span>(<span class="fl">0.3</span> *<span class="st"> </span>sample.size.total)
-sample.size.treatment.plus =<span class="st"> </span><span class="kw">as.list</span>(<span class="fl">0.2</span> *<span class="st"> </span>sample.size.total)
+sample.size.placebo.minus =<span class="st"> </span><span class="kw">as.list</span>(<span class="fl">0.3</span> <span class="op">*</span><span class="st"> </span>sample.size.total)
+sample.size.placebo.plus =<span class="st"> </span><span class="kw">as.list</span>(<span class="fl">0.2</span> <span class="op">*</span><span class="st"> </span>sample.size.total)
+sample.size.treatment.minus =<span class="st"> </span><span class="kw">as.list</span>(<span class="fl">0.3</span> <span class="op">*</span><span class="st"> </span>sample.size.total)
+sample.size.treatment.plus =<span class="st"> </span><span class="kw">as.list</span>(<span class="fl">0.2</span> <span class="op">*</span><span class="st"> </span>sample.size.total)
 
 <span class="co"># Data model</span>
-case.study3.data.model =<span class="st"> </span><span class="kw">DataModel</span>() +
-<span class="st">  </span><span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;NormalDist&quot;</span>) +
+case.study3.data.model =<span class="st"> </span><span class="kw">DataModel</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;NormalDist&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo M-&quot;</span>,
          <span class="dt">sample.size =</span> sample.size.placebo.minus,
-         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.placebo.minus)) +
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.placebo.minus)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo M+&quot;</span>,
          <span class="dt">sample.size =</span> sample.size.placebo.plus,
-         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.placebo.plus)) +
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.placebo.plus)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Treatment M-&quot;</span>,
          <span class="dt">sample.size =</span> sample.size.treatment.minus,
-         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.treatment.minus)) +
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.treatment.minus)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Treatment M+&quot;</span>,
          <span class="dt">sample.size =</span> sample.size.treatment.plus,
          <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.treatment.plus))</code></pre></div>
@@ -813,12 +813,12 @@ case.study3.data.model =<span class="st"> </span><span class="kw">DataModel</spa
 </ul>
 <p>These analysis samples are specified in the analysis model below. The samples defined in the data model are merged using <code>c()</code> or <code>list()</code> function, e.g., <code>c(&quot;Placebo M-&quot;, &quot;Placebo M+&quot;)</code>defines the placebo arm and <code>c(&quot;Treatment M-&quot;, &quot;Treatment M+&quot;)</code> defines the experimental treatment arm in the overall population test.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Analysis model</span>
-case.study3.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() +
-<span class="st">  </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;HochbergAdj&quot;</span>) +
+case.study3.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;HochbergAdj&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;OP test&quot;</span>,
        <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="kw">c</span>(<span class="st">&quot;Placebo M-&quot;</span>, <span class="st">&quot;Placebo M+&quot;</span>),
                          <span class="kw">c</span>(<span class="st">&quot;Treatment M-&quot;</span>, <span class="st">&quot;Treatment M+&quot;</span>)),
-       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>) +
+       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;M+ test&quot;</span>,
        <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo M+&quot;</span>, <span class="st">&quot;Treatment M+&quot;</span>),
        <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>)</code></pre></div>
@@ -833,20 +833,20 @@ case.study3.analysis.model =<span class="st"> </span><span class="kw">AnalysisMo
 </ul>
 <p>The following evaluation model applies the three criteria to the two tests listed in the analysis model:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Evaluation model</span>
-case.study3.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>() +
+case.study3.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Marginal power&quot;</span>,
             <span class="dt">method =</span> <span class="st">&quot;MarginalPower&quot;</span>,
             <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;OP test&quot;</span>,
                           <span class="st">&quot;M+ test&quot;</span>),
             <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;OP test&quot;</span>,
                        <span class="st">&quot;M+ test&quot;</span>),
-            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>)) +
+            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Disjunctive power&quot;</span>,
             <span class="dt">method =</span> <span class="st">&quot;DisjunctivePower&quot;</span>,
             <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;OP test&quot;</span>,
                           <span class="st">&quot;M+ test&quot;</span>),
             <span class="dt">labels =</span> <span class="st">&quot;Disjunctive power&quot;</span>,
-            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>)) +
+            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Conjunctive power&quot;</span>,
             <span class="dt">method =</span> <span class="st">&quot;ConjunctivePower&quot;</span>,
             <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;OP test&quot;</span>,
@@ -870,10 +870,10 @@ case.study3.evaluation.model =<span class="st"> </span><span class="kw">Evaluati
 <p>Case study 4 serves as an extension of the oncology clinical trial example presented in <a href="#case-study-1-1">Case study 1</a>. Consider again a Phase III trial in patients with metastatic colorectal cancer (MCC). The same general design will be assumed in this section; however, an additional endpoint (overall survival) will be introduced. The case of two endpoints helps showcase the package’s ability to model complex design and analysis strategies in trials with multivariate outcomes.</p>
 <p>Progression-free survival (PFS) is the primary endpoint in this clinical trial and overall survival (OS) serves as the key secondary endpoint, which provides supportive evidence of treatment efficacy. A hierarchical testing approach will be utilized in the analysis of the two endpoints. The PFS analysis will be performed first at α = 0.025 (one-sided), followed by the OS analysis at the same level if a significant effect on PFS is established. The resulting testing procedure is equivalent to the fixed-sequence procedure and controls the overall Type I error rate (<a href="http://onlinelibrary.wiley.com/doi/10.1002/sim.5990/abstract">Dmitrienko and D’Agostino, 2013</a>).</p>
 <p>The treatment effect assumptions that will be used in clinical scenario evaluation are listed in the table below. The table shows the hypothesized median times along with the corresponding hazard rates for the primary and secondary endpoints. It follows from the table that the expected effect size is much larger for PFS compared to OS (PFS hazard ratio is lower than OS hazard ratio).</p>
-<table style="width:94%;">
+<table style="width:100%;">
 <colgroup>
-<col width="36%"></col>
-<col width="29%"></col>
+<col width="38%"></col>
+<col width="31%"></col>
 <col width="13%"></col>
 <col width="15%"></col>
 </colgroup>
@@ -937,23 +937,23 @@ case.study3.evaluation.model =<span class="st"> </span><span class="kw">Evaluati
 <p>The hazard rates for PFS and OS in each treatment arm are defined based on the information presented in the table above (<code>placebo.par</code> and <code>treatment.par</code>) and the correlation matrix is specified based on historical information (<code>corr.matrix</code>). These parameters are combined to define the outcome parameter sets (<code>outcome.placebo</code> and <code>outcome.treatment</code>) that will be included in the sample-specific set of data model parameters (<code>Sample</code> object).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Outcome parameters: Progression-free survival</span>
 median.time.pfs.placebo =<span class="st"> </span><span class="dv">6</span>
-rate.pfs.placebo =<span class="st"> </span><span class="kw">log</span>(<span class="dv">2</span>)/median.time.pfs.placebo
+rate.pfs.placebo =<span class="st"> </span><span class="kw">log</span>(<span class="dv">2</span>)<span class="op">/</span>median.time.pfs.placebo
 outcome.pfs.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">rate =</span> rate.pfs.placebo)
 median.time.pfs.treatment =<span class="st"> </span><span class="dv">9</span>
 
-rate.pfs.treatment =<span class="st"> </span><span class="kw">log</span>(<span class="dv">2</span>)/median.time.pfs.treatment
+rate.pfs.treatment =<span class="st"> </span><span class="kw">log</span>(<span class="dv">2</span>)<span class="op">/</span>median.time.pfs.treatment
 outcome.pfs.treatment =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">rate =</span> rate.pfs.treatment)
-hazard.pfs.ratio =<span class="st"> </span>rate.pfs.treatment/rate.pfs.placebo
+hazard.pfs.ratio =<span class="st"> </span>rate.pfs.treatment<span class="op">/</span>rate.pfs.placebo
 
 <span class="co"># Outcome parameters: Overall survival</span>
 median.time.os.placebo =<span class="st"> </span><span class="dv">15</span>
-rate.os.placebo =<span class="st"> </span><span class="kw">log</span>(<span class="dv">2</span>)/median.time.os.placebo
+rate.os.placebo =<span class="st"> </span><span class="kw">log</span>(<span class="dv">2</span>)<span class="op">/</span>median.time.os.placebo
 outcome.os.placebo =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">rate =</span> rate.os.placebo)
 median.time.os.treatment =<span class="st"> </span><span class="dv">19</span>
 
-rate.os.treatment =<span class="st"> </span><span class="kw">log</span>(<span class="dv">2</span>)/median.time.os.treatment
+rate.os.treatment =<span class="st"> </span><span class="kw">log</span>(<span class="dv">2</span>)<span class="op">/</span>median.time.os.treatment
 outcome.os.treatment =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">rate =</span> rate.os.treatment)
-hazard.os.ratio =<span class="st"> </span>rate.os.treatment/rate.os.placebo
+hazard.os.ratio =<span class="st"> </span>rate.os.treatment<span class="op">/</span>rate.os.placebo
 
 <span class="co"># Parameter lists</span>
 placebo.par =<span class="st"> </span><span class="kw">parameters</span>(<span class="kw">parameters</span>(<span class="dt">rate =</span> rate.pfs.placebo), 
@@ -975,12 +975,12 @@ event.count.total =<span class="st"> </span><span class="kw">c</span>(<span clas
 randomization.ratio =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)
 
 <span class="co"># Data model</span>
-case.study4.data.model =<span class="st"> </span><span class="kw">DataModel</span>() +
-<span class="st">  </span><span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;MVExpoPFSOSDist&quot;</span>) +
+case.study4.data.model =<span class="st"> </span><span class="kw">DataModel</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;MVExpoPFSOSDist&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Event</span>(<span class="dt">n.events =</span> event.count.total, 
-        <span class="dt">rando.ratio =</span> randomization.ratio) +
+        <span class="dt">rando.ratio =</span> randomization.ratio) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="kw">list</span>(<span class="st">&quot;Placebo PFS&quot;</span>, <span class="st">&quot;Placebo OS&quot;</span>),
-         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.placebo)) +
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.placebo)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="kw">list</span>(<span class="st">&quot;Treatment PFS&quot;</span>, <span class="st">&quot;Treatment OS&quot;</span>),
          <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome.treatment))</code></pre></div>
 </div>
@@ -1013,23 +1013,23 @@ chain.transition =<span class="st"> </span><span class="kw">matrix</span>(<span 
                             <span class="dv">0</span>, <span class="dv">0</span>), <span class="dv">2</span>, <span class="dv">2</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)
 
 <span class="co"># Analysis model</span>
-case.study4.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() +
+case.study4.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;ChainAdj&quot;</span>,
-              <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">weight =</span> chain.weight, <span class="dt">transition =</span> chain.transition)) +
+              <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">weight =</span> chain.weight, <span class="dt">transition =</span> chain.transition)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;PFS test&quot;</span>,
        <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo PFS&quot;</span>, <span class="st">&quot;Treatment PFS&quot;</span>),
-       <span class="dt">method =</span> <span class="st">&quot;LogrankTest&quot;</span>) +
+       <span class="dt">method =</span> <span class="st">&quot;LogrankTest&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;OS test&quot;</span>,
        <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo OS&quot;</span>, <span class="st">&quot;Treatment OS&quot;</span>),
        <span class="dt">method =</span> <span class="st">&quot;LogrankTest&quot;</span>)</code></pre></div>
 <p>As shown above, the two significance tests included in the analysis model reflect the two-fold objective of this trial. The first test focuses on a PFS comparison between the two treatment arms (<code>id = &quot;PFS test&quot;</code>) whereas the other test is carried out to assess the treatment effect on OS (<code>test.id = &quot;OS test&quot;</code>).</p>
 <p>Alternatively, the fixed-sequence procedure can be implemented using the method <code>FixedSeqAdj</code> introduced from version 1.0.4. This implementation is facilitated as no parameters have to be specified.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Analysis model</span>
-case.study4.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() +
-<span class="st">  </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;FixedSeqAdj&quot;</span>) +
+case.study4.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;FixedSeqAdj&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;PFS test&quot;</span>,
        <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo PFS&quot;</span>, <span class="st">&quot;Treatment PFS&quot;</span>),
-       <span class="dt">method =</span> <span class="st">&quot;LogrankTest&quot;</span>) +
+       <span class="dt">method =</span> <span class="st">&quot;LogrankTest&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;OS test&quot;</span>,
        <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo OS&quot;</span>, <span class="st">&quot;Treatment OS&quot;</span>),
        <span class="dt">method =</span> <span class="st">&quot;LogrankTest&quot;</span>)</code></pre></div>
@@ -1039,7 +1039,7 @@ case.study4.analysis.model =<span class="st"> </span><span class="kw">AnalysisMo
 <p>The evaluation model specifies the most basic criterion for assessing the probability of success in the PFS and OS analyses (marginal power). A criterion based on disjunctive power could be considered but it would not provide additional information.</p>
 <p>Due to the hierarchical testing approach, the probability of detecting a significant treatment effect on at least one endpoint (disjunctive power) is simply equal to the probability of establishing a significant PFS effect.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Evaluation model</span>
-case.study4.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>() +
+case.study4.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Marginal power&quot;</span>,
             <span class="dt">method =</span> <span class="st">&quot;MarginalPower&quot;</span>,
             <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;PFS test&quot;</span>,
@@ -1071,12 +1071,12 @@ case.study4.evaluation.model =<span class="st"> </span><span class="kw">Evaluati
 <p>The efficacy profile of two doses of a new treatment (Doses L and Dose H) will be compared to that of a placebo and a successful outcome will be defined as a significant treatment effect at either or both doses. A hierarchical structure has been established within each dose so that Endpoint 2 will be tested if and only if there is evidence of a significant effect on Endpoint 1.</p>
 <p>Three treatment effect scenarios for each endpoint are displayed in the table below. The scenarios define three outcome parameter sets. The first set represents a rather conservative treatment effect scenario, the second set is a standard (most plausible) scenario and the third set represents an optimistic scenario. Note that a reduction in the HAQ-DI score indicates a beneficial effect and thus the mean changes are assumed to be negative for Endpoint 2.</p>
 <table>
+<caption>Table continues below</caption>
 <colgroup>
-<col width="23%"></col>
-<col width="29%"></col>
-<col width="15%"></col>
-<col width="15%"></col>
-<col width="15%"></col>
+<col width="28%"></col>
+<col width="32%"></col>
+<col width="20%"></col>
+<col width="20%"></col>
 </colgroup>
 <thead>
 <tr class="header">
@@ -1084,7 +1084,6 @@ case.study4.evaluation.model =<span class="st"> </span><span class="kw">Evaluati
 <th align="center">Outcome.parameter.set</th>
 <th align="center">Placebo</th>
 <th align="center">Dose.L</th>
-<th align="center">Dose.H</th>
 </tr>
 </thead>
 <tbody>
@@ -1093,41 +1092,65 @@ case.study4.evaluation.model =<span class="st"> </span><span class="kw">Evaluati
 <td align="center">Conservative</td>
 <td align="center">30%</td>
 <td align="center">40%</td>
-<td align="center">50%</td>
 </tr>
 <tr class="even">
 <td align="center"></td>
 <td align="center">Standard</td>
 <td align="center">30%</td>
 <td align="center">45%</td>
-<td align="center">55%</td>
 </tr>
 <tr class="odd">
 <td align="center"></td>
 <td align="center">Optimistic</td>
 <td align="center">30%</td>
 <td align="center">50%</td>
-<td align="center">60%</td>
 </tr>
 <tr class="even">
 <td align="center">HAQ-DI (mean (SD))</td>
 <td align="center">Conservative</td>
 <td align="center">-0.10 (0.50)</td>
 <td align="center">-0.20 (0.50)</td>
-<td align="center">-0.30 (0.50)</td>
 </tr>
 <tr class="odd">
 <td align="center"></td>
 <td align="center">Standard</td>
 <td align="center">-0.10 (0.50)</td>
 <td align="center">-0.25 (0.50)</td>
-<td align="center">-0.35 (0.50)</td>
 </tr>
 <tr class="even">
 <td align="center"></td>
 <td align="center">Optimistic</td>
 <td align="center">-0.10 (0.50)</td>
 <td align="center">-0.30 (0.50)</td>
+</tr>
+</tbody>
+</table>
+<table style="width:19%;">
+<colgroup>
+<col width="19%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Dose.H</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">50%</td>
+</tr>
+<tr class="even">
+<td align="center">55%</td>
+</tr>
+<tr class="odd">
+<td align="center">60%</td>
+</tr>
+<tr class="even">
+<td align="center">-0.30 (0.50)</td>
+</tr>
+<tr class="odd">
+<td align="center">-0.35 (0.50)</td>
+</tr>
+<tr class="even">
 <td align="center">-0.40 (0.50)</td>
 </tr>
 </tbody>
@@ -1148,21 +1171,21 @@ var.type =<span class="st"> </span><span class="kw">list</span>(<span class="st"
 
 <span class="co"># Outcome distribution parameters</span>
 placebo.par =<span class="st"> </span><span class="kw">parameters</span>(<span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.3</span>), 
-                         <span class="kw">parameters</span>(<span class="dt">mean =</span> -<span class="fl">0.10</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))
+                         <span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="op">-</span><span class="fl">0.10</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))
 
 dosel.par1 =<span class="st"> </span><span class="kw">parameters</span>(<span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.40</span>), 
-                        <span class="kw">parameters</span>(<span class="dt">mean =</span> -<span class="fl">0.20</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))
+                        <span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="op">-</span><span class="fl">0.20</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))
 dosel.par2 =<span class="st"> </span><span class="kw">parameters</span>(<span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.45</span>), 
-                        <span class="kw">parameters</span>(<span class="dt">mean =</span> -<span class="fl">0.25</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))
+                        <span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="op">-</span><span class="fl">0.25</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))
 dosel.par3 =<span class="st"> </span><span class="kw">parameters</span>(<span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.50</span>), 
-                        <span class="kw">parameters</span>(<span class="dt">mean =</span> -<span class="fl">0.30</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))
+                        <span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="op">-</span><span class="fl">0.30</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))
 
 doseh.par1 =<span class="st"> </span><span class="kw">parameters</span>(<span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.50</span>), 
-                        <span class="kw">parameters</span>(<span class="dt">mean =</span> -<span class="fl">0.30</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))
+                        <span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="op">-</span><span class="fl">0.30</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))
 doseh.par2 =<span class="st"> </span><span class="kw">parameters</span>(<span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.55</span>), 
-                        <span class="kw">parameters</span>(<span class="dt">mean =</span> -<span class="fl">0.35</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))
+                        <span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="op">-</span><span class="fl">0.35</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))
 doseh.par3 =<span class="st"> </span><span class="kw">parameters</span>(<span class="kw">parameters</span>(<span class="dt">prop =</span> <span class="fl">0.60</span>), 
-                        <span class="kw">parameters</span>(<span class="dt">mean =</span> -<span class="fl">0.40</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))
+                        <span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="op">-</span><span class="fl">0.40</span>, <span class="dt">sd =</span> <span class="fl">0.5</span>))
 
 <span class="co"># Correlation between two endpoints</span>
 corr.matrix =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="fl">1.0</span>, <span class="fl">0.5</span>,
@@ -1202,13 +1225,13 @@ outcome3.dosel =<span class="st"> </span><span class="kw">parameters</span>(<spa
                             <span class="dt">corr =</span> corr.matrix)</code></pre></div>
 <p>These outcome parameter set are then combined within each <code>Sample</code> object and the common sample size per treatment arm ranges between 100 and 120:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Data model</span>
-case.study5.data.model =<span class="st"> </span><span class="kw">DataModel</span>() +
-<span class="st">  </span><span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;MVMixedDist&quot;</span>) +
-<span class="st">  </span><span class="kw">SampleSize</span>(<span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">120</span>)) +
+case.study5.data.model =<span class="st"> </span><span class="kw">DataModel</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;MVMixedDist&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">SampleSize</span>(<span class="kw">c</span>(<span class="dv">100</span>, <span class="dv">120</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="kw">list</span>(<span class="st">&quot;Placebo ACR20&quot;</span>, <span class="st">&quot;Placebo HAQ-DI&quot;</span>),
-         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.placebo, outcome2.placebo, outcome3.placebo)) +
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.placebo, outcome2.placebo, outcome3.placebo)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="kw">list</span>(<span class="st">&quot;DoseL ACR20&quot;</span>, <span class="st">&quot;DoseL HAQ-DI&quot;</span>),
-         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.dosel, outcome2.dosel, outcome3.dosel)) +
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.dosel, outcome2.dosel, outcome3.dosel)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="kw">list</span>(<span class="st">&quot;DoseH ACR20&quot;</span>, <span class="st">&quot;DoseH HAQ-DI&quot;</span>),
          <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.doseh, outcome2.doseh, outcome3.doseh))</code></pre></div>
 </div>
@@ -1262,21 +1285,21 @@ gamma =<span class="st"> </span><span class="kw">families</span>(<span class="dt
 <p>The families will be tested sequentially and a truncated Holm procedure will be applied within each family (<code>component.procedure</code>). Lastly, the truncation parameter will be set to 0.8 in Family 1 and to 1 in Family 2 (<code>gamma</code>). The resulting parameters are included in the <code>par</code> argument of the <code>MultAdjProc</code> object and, as before, the <code>proc</code> argument is used to specify the multiple testing procedure (<code>MultipleSequenceGatekeepingAdj</code>).</p>
 <p>The test are then specified in the analysis model and the overall analysis model is defined as follows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Analysis model</span>
-case.study5.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() +
+case.study5.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;MultipleSequenceGatekeepingAdj&quot;</span>,
               <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">family =</span> family, 
                                <span class="dt">proc =</span> component.procedure, 
                                <span class="dt">gamma =</span> gamma),
-              <span class="dt">tests =</span> test.list) +
+              <span class="dt">tests =</span> test.list) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs DoseL - ACR20&quot;</span>,
        <span class="dt">method =</span> <span class="st">&quot;PropTest&quot;</span>,
-       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo ACR20&quot;</span>, <span class="st">&quot;DoseL ACR20&quot;</span>)) +
+       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo ACR20&quot;</span>, <span class="st">&quot;DoseL ACR20&quot;</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs DoseH - ACR20&quot;</span>,
        <span class="dt">method =</span> <span class="st">&quot;PropTest&quot;</span>,
-       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo ACR20&quot;</span>, <span class="st">&quot;DoseH ACR20&quot;</span>)) +
+       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo ACR20&quot;</span>, <span class="st">&quot;DoseH ACR20&quot;</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs DoseL - HAQ-DI&quot;</span>,
        <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>,
-       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;DoseL HAQ-DI&quot;</span>, <span class="st">&quot;Placebo HAQ-DI&quot;</span>)) +
+       <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;DoseL HAQ-DI&quot;</span>, <span class="st">&quot;Placebo HAQ-DI&quot;</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs DoseH - HAQ-DI&quot;</span>,
        <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>,
        <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;DoseH HAQ-DI&quot;</span>, <span class="st">&quot;Placebo HAQ-DI&quot;</span>))</code></pre></div>
@@ -1288,7 +1311,7 @@ case.study5.analysis.model =<span class="st"> </span><span class="kw">AnalysisMo
 <p>This criterion will be met if a significant effect is established at one or two doses on Endpoint 1 (ACR20) and also at one or two doses on Endpoint 2 (HAQ-DI). However, due to the hierarchical structure of the testing strategy (see Figure), this is equivalent to demonstrating a significant difference between Placebo and at least one dose with respect to Endpoint 2. The corresponding criterion is a subset disjunctive criterion based on the two Endpoint 2 tests (subset disjunctive power was briefly mentioned in <a href="CaseStudy02">Case study 2</a>).</p>
 <p>In addition, the sponsor may also be interested in evaluating marginal power as well as subset disjunctive power based on the Endpoint 1 tests. The latter criterion will be met if a significant difference between Placebo and at least one dose is established with respect to Endpoint 1. Additionally, as in <a href="CaseStudy02">Case study 2</a>, the user could consider defining custom evaluation criteria. The three resulting evaluation criteria (marginal power, subset disjunctive criterion based on the Endpoint 1 tests and subset disjunctive criterion based on the Endpoint 2 tests) are included in the following evaluation model.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Evaluation model</span>
-case.study5.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>() +
+case.study5.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Marginal power&quot;</span>,
             <span class="dt">method =</span> <span class="st">&quot;MarginalPower&quot;</span>,
             <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs DoseL - ACR20&quot;</span>,
@@ -1299,13 +1322,13 @@ case.study5.evaluation.model =<span class="st"> </span><span class="kw">Evaluati
                        <span class="st">&quot;Placebo vs DoseH - ACR20&quot;</span>,
                        <span class="st">&quot;Placebo vs DoseL - HAQ-DI&quot;</span>,
                        <span class="st">&quot;Placebo vs DoseH - HAQ-DI&quot;</span>),
-            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>)) +
+            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Disjunctive power - ACR20&quot;</span>,
             <span class="dt">method =</span> <span class="st">&quot;DisjunctivePower&quot;</span>,
             <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs DoseL - ACR20&quot;</span>,
                           <span class="st">&quot;Placebo vs DoseH - ACR20&quot;</span>),
             <span class="dt">labels =</span> <span class="st">&quot;Disjunctive power - ACR20&quot;</span>,
-            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>)) +
+            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Disjunctive power - HAQ-DI&quot;</span>,
             <span class="dt">method =</span> <span class="st">&quot;DisjunctivePower&quot;</span>,
             <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs DoseL - HAQ-DI&quot;</span>,
@@ -1331,10 +1354,10 @@ case.study5.evaluation.model =<span class="st"> </span><span class="kw">Evaluati
 <div id="define-a-data-model-9" class="section level2">
 <h2>Define a Data Model</h2>
 <p>The same data model as in <a href="#case-study-2-1">Case study 2</a> will be used in this case study. However, as shown in the table below, a new set of outcome parameters will be added in this case study (an optimistic set of parameters).</p>
-<table style="width:60%;">
+<table style="width:62%;">
 <colgroup>
 <col width="33%"></col>
-<col width="11%"></col>
+<col width="13%"></col>
 <col width="9%"></col>
 <col width="5%"></col>
 </colgroup>
@@ -1410,15 +1433,15 @@ outcome2.dosem =<span class="st"> </span><span class="kw">parameters</span>(<spa
 outcome2.doseh =<span class="st"> </span><span class="kw">parameters</span>(<span class="dt">mean =</span> <span class="dv">22</span>, <span class="dt">sd =</span> <span class="dv">18</span>)
 
 <span class="co"># Data model</span>
-case.study6.data.model =<span class="st"> </span><span class="kw">DataModel</span>() +
-<span class="st">  </span><span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;NormalDist&quot;</span>) +
-<span class="st">  </span><span class="kw">SampleSize</span>(<span class="kw">seq</span>(<span class="dv">220</span>, <span class="dv">260</span>, <span class="dv">20</span>)) +
+case.study6.data.model =<span class="st"> </span><span class="kw">DataModel</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">OutcomeDist</span>(<span class="dt">outcome.dist =</span> <span class="st">&quot;NormalDist&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">SampleSize</span>(<span class="kw">seq</span>(<span class="dv">220</span>, <span class="dv">260</span>, <span class="dv">20</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo&quot;</span>,
-         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.placebo, outcome2.placebo)) +
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.placebo, outcome2.placebo)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Dose L&quot;</span>,
-         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.dosel, outcome2.dosel)) +
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.dosel, outcome2.dosel)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Dose M&quot;</span>,
-         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.dosem, outcome2.dosem)) +
+         <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.dosem, outcome2.dosem)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Sample</span>(<span class="dt">id =</span> <span class="st">&quot;Dose H&quot;</span>,
          <span class="dt">outcome.par =</span> <span class="kw">parameters</span>(outcome1.doseh, outcome2.doseh))</code></pre></div>
 </div>
@@ -1437,27 +1460,27 @@ mult.adj1 =<span class="st"> </span><span class="kw">MultAdjProc</span>(<span cl
 
 <span class="co"># Bonferroni adjustment (with unequal weights)</span>
 mult.adj2 =<span class="st"> </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;BonferroniAdj&quot;</span>,
-                        <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">weight =</span> <span class="kw">c</span>(<span class="dv">1</span>/<span class="dv">4</span>,<span class="dv">1</span>/<span class="dv">4</span>,<span class="dv">1</span>/<span class="dv">2</span>)))
+                        <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">weight =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">4</span>,<span class="dv">1</span><span class="op">/</span><span class="dv">4</span>,<span class="dv">1</span><span class="op">/</span><span class="dv">2</span>)))
 
 <span class="co"># Holm adjustment (with unequal weights)</span>
 mult.adj3 =<span class="st"> </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;HolmAdj&quot;</span>, 
-                        <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">weight =</span> <span class="kw">c</span>(<span class="dv">1</span>/<span class="dv">4</span>,<span class="dv">1</span>/<span class="dv">4</span>,<span class="dv">1</span>/<span class="dv">2</span>)))
+                        <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">weight =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">4</span>,<span class="dv">1</span><span class="op">/</span><span class="dv">4</span>,<span class="dv">1</span><span class="op">/</span><span class="dv">2</span>)))
 
 <span class="co"># Hochberg adjustment (with unequal weights)</span>
 mult.adj4 =<span class="st"> </span><span class="kw">MultAdjProc</span>(<span class="dt">proc =</span> <span class="st">&quot;HochbergAdj&quot;</span>, 
-                        <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">weight =</span> <span class="kw">c</span>(<span class="dv">1</span>/<span class="dv">4</span>,<span class="dv">1</span>/<span class="dv">4</span>,<span class="dv">1</span>/<span class="dv">2</span>)))</code></pre></div>
+                        <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">weight =</span> <span class="kw">c</span>(<span class="dv">1</span><span class="op">/</span><span class="dv">4</span>,<span class="dv">1</span><span class="op">/</span><span class="dv">4</span>,<span class="dv">1</span><span class="op">/</span><span class="dv">2</span>)))</code></pre></div>
 <p>The <code>mult.adj1</code> object, which specified that no adjustment will be used, is defined in order to observe the decrease in power induced by each MTPs.</p>
 <p>It should be noted that for each weighted procedure, a higher weight is assigned to the test of Placebo vs Dose H (1/2), and the remaining weight is equally assigned to the two other tests (i.e. 1/4 for each test). These parameters are specified in the <code>par</code> argument of each MTP.</p>
 <p>The analysis model is defined as follows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Analysis model</span>
-case.study6.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() +
-<span class="st">  </span><span class="kw">MultAdj</span>(mult.adj1, mult.adj2, mult.adj3, mult.adj4) +
+case.study6.analysis.model =<span class="st"> </span><span class="kw">AnalysisModel</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">MultAdj</span>(mult.adj1, mult.adj2, mult.adj3, mult.adj4) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs Dose L&quot;</span>,
        <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Dose L&quot;</span>),
-       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>) +
+       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs Dose M&quot;</span>,
        <span class="dt">samples =</span> <span class="kw">samples</span> (<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Dose M&quot;</span>),
-       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>) +
+       <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Test</span>(<span class="dt">id =</span> <span class="st">&quot;Placebo vs Dose H&quot;</span>,
        <span class="dt">samples =</span> <span class="kw">samples</span>(<span class="st">&quot;Placebo&quot;</span>, <span class="st">&quot;Dose H&quot;</span>),
        <span class="dt">method =</span> <span class="st">&quot;TTest&quot;</span>)</code></pre></div>
@@ -1467,7 +1490,7 @@ case.study6.analysis.model =<span class="st"> </span><span class="kw">AnalysisMo
 <h2>Define an Evaluation Model</h2>
 <p>As for the data model, the same evaluation model as in <a href="#case-study-2-1">Case study 2</a> will be used in this case study. Refer to <a href="#case-study-2-1">Case study 2</a> for more information.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Evaluation model</span>
-case.study6.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>() +
+case.study6.evaluation.model =<span class="st"> </span><span class="kw">EvaluationModel</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Marginal power&quot;</span>,
             <span class="dt">method =</span> <span class="st">&quot;MarginalPower&quot;</span>,
             <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs Dose L&quot;</span>,
@@ -1476,14 +1499,14 @@ case.study6.evaluation.model =<span class="st"> </span><span class="kw">Evaluati
             <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Placebo vs Dose L&quot;</span>,
                        <span class="st">&quot;Placebo vs Dose M&quot;</span>,
                        <span class="st">&quot;Placebo vs Dose H&quot;</span>),
-            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>)) +
+            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Disjunctive power&quot;</span>,
             <span class="dt">method =</span> <span class="st">&quot;DisjunctivePower&quot;</span>,
             <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs Dose L&quot;</span>,
                           <span class="st">&quot;Placebo vs Dose M&quot;</span>,
                           <span class="st">&quot;Placebo vs Dose H&quot;</span>),
             <span class="dt">labels =</span> <span class="st">&quot;Disjunctive power&quot;</span>,
-            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>)) +
+            <span class="dt">par =</span> <span class="kw">parameters</span>(<span class="dt">alpha =</span> <span class="fl">0.025</span>)) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Criterion</span>(<span class="dt">id =</span> <span class="st">&quot;Dose H and at least one dose&quot;</span>,
             <span class="dt">method =</span> <span class="st">&quot;case.study6.criterion&quot;</span>,
             <span class="dt">tests =</span> <span class="kw">tests</span>(<span class="st">&quot;Placebo vs Dose L&quot;</span>,
@@ -1521,13 +1544,13 @@ case.study6.results =<span class="st"> </span><span class="kw">CSE</span>(case.s
 <li><p>A report with combined sections.</p></li>
 </ul>
 <p>First of all, a default <code>PresentationModel</code> object (<code>case.study6.presentation.model.default</code>) will be created. This object will include the common components of the report that are shared across the presentation models. The project information (<code>Project</code> object), sorting options in summary tables (<code>Table</code> object) and specification of custom labels (<code>CustomLabel</code> objects) are included in this object:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study6.presentation.model.default =<span class="st"> </span><span class="kw">PresentationModel</span>() +
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">case.study6.presentation.model.default =<span class="st"> </span><span class="kw">PresentationModel</span>() <span class="op">+</span>
 <span class="st">  </span><span class="kw">Project</span>(<span class="dt">username =</span> <span class="st">&quot;[Mediana's User]&quot;</span>,
           <span class="dt">title =</span> <span class="st">&quot;Case study 6&quot;</span>,
-          <span class="dt">description =</span> <span class="st">&quot;Clinical trial in patients with schizophrenia - Several MTPs&quot;</span>) +
-<span class="st">  </span><span class="kw">Table</span>(<span class="dt">by =</span> <span class="st">&quot;sample.size&quot;</span>) +
+          <span class="dt">description =</span> <span class="st">&quot;Clinical trial in patients with schizophrenia - Several MTPs&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">Table</span>(<span class="dt">by =</span> <span class="st">&quot;sample.size&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">CustomLabel</span>(<span class="dt">param =</span> <span class="st">&quot;sample.size&quot;</span>, 
-              <span class="dt">label =</span> <span class="kw">paste0</span>(<span class="st">&quot;N = &quot;</span>, <span class="kw">seq</span>(<span class="dv">220</span>, <span class="dv">260</span>, <span class="dv">20</span>))) +
+              <span class="dt">label =</span> <span class="kw">paste0</span>(<span class="st">&quot;N = &quot;</span>, <span class="kw">seq</span>(<span class="dv">220</span>, <span class="dv">260</span>, <span class="dv">20</span>))) <span class="op">+</span>
 <span class="st">  </span><span class="kw">CustomLabel</span>(<span class="dt">param =</span> <span class="st">&quot;multiplicity.adjustment&quot;</span>, 
               <span class="dt">label =</span> <span class="kw">c</span>(<span class="st">&quot;No adjustment&quot;</span>, <span class="st">&quot;Bonferroni adjustment&quot;</span>, <span class="st">&quot;Holm adjustment&quot;</span>, <span class="st">&quot;Hochberg adjustment&quot;</span>))</code></pre></div>
 </div>
@@ -1535,7 +1558,7 @@ case.study6.results =<span class="st"> </span><span class="kw">CSE</span>(case.s
 <h4>Report without subsections</h4>
 <p>The first simulation report will include a section for each outcome parameter set. To accomplish this, a <code>Section</code> object is added to the default <code>PresentationModel</code> object and the report is generated:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Reporting 1 - Without subsections</span>
-case.study6.presentation.model1 =<span class="st"> </span>case.study6.presentation.model.default +
+case.study6.presentation.model1 =<span class="st"> </span>case.study6.presentation.model.default <span class="op">+</span>
 <span class="st">  </span><span class="kw">Section</span>(<span class="dt">by =</span> <span class="st">&quot;outcome.parameter&quot;</span>)
 
 <span class="co"># Report Generation</span>
@@ -1547,8 +1570,8 @@ case.study6.presentation.model1 =<span class="st"> </span>case.study6.presentati
 <h4>Report with subsections</h4>
 <p>The second report will include a section for each outcome parameter set and, in addition, a subsection will be created for each multiplicity adjustment procedure. The <code>Section</code> and <code>Subsection</code> objects are added to the default <code>PresentationModel</code> object as shown below and the report is generated:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Reporting 2 - With subsections</span>
-case.study6.presentation.model2 =<span class="st"> </span>case.study6.presentation.model.default +
-<span class="st">  </span><span class="kw">Section</span>(<span class="dt">by =</span> <span class="st">&quot;outcome.parameter&quot;</span>) +
+case.study6.presentation.model2 =<span class="st"> </span>case.study6.presentation.model.default <span class="op">+</span>
+<span class="st">  </span><span class="kw">Section</span>(<span class="dt">by =</span> <span class="st">&quot;outcome.parameter&quot;</span>) <span class="op">+</span>
 <span class="st">  </span><span class="kw">Subsection</span>(<span class="dt">by =</span> <span class="st">&quot;multiplicity.adjustment&quot;</span>) 
 
 <span class="co"># Report Generation</span>
@@ -1560,7 +1583,7 @@ case.study6.presentation.model2 =<span class="st"> </span>case.study6.presentati
 <h4>Report with combined sections</h4>
 <p>Finally, the third report will include a section for each combination of outcome parameter set and each multiplicity adjustment procedure. This is accomplished by adding a <code>Section</code> object to the default <code>PresentationModel</code> object and specifying the outcome parameter and multiplicity adjustment in the section’s <code>by</code> argument.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Reporting 3 - Combined sections</span>
-case.study6.presentation.model3 =<span class="st"> </span>case.study6.presentation.model.default +
+case.study6.presentation.model3 =<span class="st"> </span>case.study6.presentation.model.default <span class="op">+</span>
 <span class="st">  </span><span class="kw">Section</span>(<span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;outcome.parameter&quot;</span>, <span class="st">&quot;multiplicity.adjustment&quot;</span>))
 
 <span class="co"># Report Generation</span>
@@ -1589,7 +1612,7 @@ case.study6.presentation.model3 =<span class="st"> </span>case.study6.presentati
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
