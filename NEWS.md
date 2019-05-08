@@ -1,8 +1,26 @@
+# Mediana 1.0.8
+
+## New features
+
+* Create an hexagon sticker for the package.
+
+## Bug fixes
+
+* Fix the calculation of intersection hypothesis pvalue when family weights is null for all gatekeeping procedures.
+
+* Revise the error fraction function to avoid floating point issue 
+
+* Fix the images in the Case studies vignette
+
+* Revise the specification of serial and parallel parameters in MixtureGatekeepingAdj (matrix instead of list)
+
+* Revise the Outcome table generation function used for reporting
+
 # Mediana 1.0.7
 
 ## Bug fixes
 
-- As the `ReporteRs` R package is not available on the CRAN anymore, the report generation feature has been revised using the `officer` and `flextable` R packages. These packages are now required to use the `GenerateReport` function.
+* As the `ReporteRs` R package is not available on the CRAN anymore, the report generation feature has been revised using the `officer` and `flextable` R packages. These packages are now required to use the `GenerateReport` function.
 
 # Mediana 1.0.6
 
